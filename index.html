@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA Skills Analysis | Jaiditya Abhineet Kapoor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #1a73e8;
+            margin: 0;
+            font-size: 28px;
+        }
+        .contact-info {
+            text-align: right;
+        }
+        .contact-info p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+        .contact-info a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .info {
+            background-color: #e8f0fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #1a73e8;
+        }
+        .info p {
+            margin: 5px 0;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 300px;
+            font-size: 16px;
+        }
+        .download-btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #155ab6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        th {
+            background-color: #1a73e8;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #e8f0fe;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>QA Skills Analysis</h1>
+                <p><strong>Subject:</strong> RUBRIC ASSIGNMENT SUBMISSION</p>
+            </div>
+            <div class="contact-info">
+                <p><strong>Name:</strong> Jaiditya Abhineet Kapoor</p>
+                <p><strong>Phone:</strong> <a href="tel:+918955045316">+91 89550 45316</a></p>
+                <p><strong>Email:</strong> <a href="mailto:jakapoor2004@gmail.com">jakapoor2004@gmail.com</a></p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jak0707/" target="_blank">linkedin.com/in/jak0707</a></p>
+            </div>
+        </div>
+
+        <div class="info">
+            <p><strong>Analysis Summary:</strong> Extracted and categorized QA skills from 60 job descriptions across various companies and domains.</p>
+            <p><strong>Total Unique Primary Skills Identified:</strong> 45+ skills covering automation, manual testing, performance, security, and specialized testing areas.</p>
+        </div>
+
+        <div class="controls">
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="Search for skills...">
+            <button class="download-btn" onclick="downloadExcel()">Download as Excel File</button>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table id="skillsTable">
+                <thead>
+                    <tr>
+                        <th>Primary Skill</th>
+                        <th>Associated Skills</th>
+                        <th>Associated Terms</th>
+                        <th>Area of Testing</th>
+                        <th>Associated Language</th>
+                        <th>Source JD</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <p>Submission by Jaiditya Abhineet Kapoor</p>
+        </div>
+    </div>
+
+    <script>
+        const qaSkillsData = [
+            // ... (The original qaSkillsData array remains unchanged here) ...
+            {
+                primarySkill: "Selenium WebDriver",
+                associatedSkills: "Selenium Grid, Selenium IDE, Selenium RC, WebDriverIO",
+                associatedTerms: "Web automation, UI testing, Cross-browser testing, Element locators, Page Object Model",
+                areaOfTesting: "UI/Web Automation",
+                associatedLanguage: "Java, Python, C#, JavaScript",
+                sourceJD: "Truminds, BRIDGEi2i, Qualys, Qualitest, Qualcomm"
+            },
+            {
+                primarySkill: "Cypress",
+                associatedSkills: "Mocha, Chai, Cypress Dashboard, cy commands",
+                associatedTerms: "End-to-end testing, Component testing, JavaScript testing, Real-time reloads",
+                areaOfTesting: "UI/Web Automation",
+                associatedLanguage: "JavaScript, TypeScript",
+                sourceJD: "Millennium, Bahwan CyberTek, Aptagrim Consulting"
+            },
+            {
+                primarySkill: "Playwright",
+                associatedSkills: "Playwright Test, Playwright Inspector, Codegen",
+                associatedTerms: "Cross-browser automation, Headless testing, API testing, Visual testing",
+                areaOfTesting: "UI/Web Automation",
+                associatedLanguage: "JavaScript, TypeScript, Python, C#",
+                sourceJD: "Qualcomm, Guidewire Software, Mission Studios"
+            },
+            {
+                primarySkill: "Appium",
+                associatedSkills: "Appium Desktop, Appium Inspector, XCUITest, Espresso",
+                associatedTerms: "Mobile automation, Native apps, Hybrid apps, Mobile web testing",
+                areaOfTesting: "Mobile Testing",
+                associatedLanguage: "Java, Python, JavaScript, Ruby",
+                sourceJD: "Xoxoday, Pixous Technologies, PharmEasy"
+            },
+            {
+                primarySkill: "REST API Testing",
+                associatedSkills: "Postman, REST Assured, Swagger, Newman, Insomnia",
+                associatedTerms: "RESTful services, HTTP methods, JSON validation, API documentation, Response validation",
+                areaOfTesting: "API Testing",
+                associatedLanguage: "Java, Python, JavaScript, Groovy",
+                sourceJD: "Royal Cyber, Qualitest, SigFig, Autuskey"
+            },
+            {
+                primarySkill: "JMeter",
+                associatedSkills: "BlazeMeter, JMeter plugins, Distributed testing",
+                associatedTerms: "Load testing, Performance testing, Stress testing, Thread groups, Listeners",
+                areaOfTesting: "Performance Testing",
+                associatedLanguage: "Java, Groovy",
+                sourceJD: "Bellurbis, Xoxoday, CloudSmartz, QNOPY Inc"
+            },
+            {
+                primarySkill: "LoadRunner",
+                associatedSkills: "VuGen, Controller, Analysis, TruClient",
+                associatedTerms: "Performance testing, Virtual users, Scenarios, Correlation, Parameterization",
+                areaOfTesting: "Performance Testing",
+                associatedLanguage: "C, JavaScript",
+                sourceJD: "Truminds, QNOPY Inc, System Soft Technologies"
+            },
+            {
+                primarySkill: "TestNG",
+                associatedSkills: "Annotations, Data Providers, Test Suites, Parallel execution",
+                associatedTerms: "Test framework, Unit testing, Integration testing, Test configuration",
+                areaOfTesting: "Test Frameworks",
+                associatedLanguage: "Java",
+                sourceJD: "CloudSmartz, Guidewire Software, DigiCert"
+            },
+            {
+                primarySkill: "Cucumber",
+                associatedSkills: "Gherkin, Step Definitions, Feature files, Cucumber Reports",
+                associatedTerms: "BDD, Behavior-driven development, Scenario outline, Given-When-Then",
+                areaOfTesting: "BDD/Test Frameworks",
+                associatedLanguage: "Java, Ruby, JavaScript",
+                sourceJD: "Qualys, Royal Cyber, Bahwan CyberTek"
+            },
+            {
+                primarySkill: "Jenkins",
+                associatedSkills: "Pipeline, Blue Ocean, Jenkins plugins, Jenkinsfile",
+                associatedTerms: "CI/CD, Continuous Integration, Build automation, Pipeline as code",
+                areaOfTesting: "CI/CD Tools",
+                associatedLanguage: "Groovy, Shell scripting",
+                sourceJD: "BRIDGEi2i, CloudSmartz, Infoblox, DigiCert"
+            },
+            {
+                primarySkill: "JIRA",
+                associatedSkills: "Zephyr, X-Ray, JIRA plugins, Confluence",
+                associatedTerms: "Bug tracking, Test management, Agile boards, Sprint planning",
+                areaOfTesting: "Test Management",
+                associatedLanguage: "N/A",
+                sourceJD: "Qualys, Bellurbis, Cibirix, Thoughts2Binary"
+            },
+            {
+                primarySkill: "SQL Testing",
+                associatedSkills: "MySQL, PostgreSQL, Oracle DB, MongoDB",
+                associatedTerms: "Database testing, Query validation, Data integrity, Stored procedures",
+                areaOfTesting: "Database Testing",
+                associatedLanguage: "SQL, PL/SQL",
+                sourceJD: "C1X Inc, SigFig, Andor Tech, tax.com"
+            },
+            {
+                primarySkill: "Karate Framework",
+                associatedSkills: "Karate DSL, Karate UI, Karate Gatling",
+                associatedTerms: "API testing, BDD for APIs, Mock servers, Performance testing",
+                areaOfTesting: "API Testing",
+                associatedLanguage: "Java",
+                sourceJD: "Guidewire Software"
+            },
+            {
+                primarySkill: "Robot Framework",
+                associatedSkills: "SeleniumLibrary, DatabaseLibrary, RequestsLibrary",
+                associatedTerms: "Keyword-driven testing, Test automation, ATDD",
+                areaOfTesting: "Test Automation Frameworks",
+                associatedLanguage: "Python, Java",
+                sourceJD: "Bahwan CyberTek"
+            },
+            {
+                primarySkill: "Pytest",
+                associatedSkills: "pytest-selenium, pytest-bdd, pytest-xdist",
+                associatedTerms: "Python testing, Fixtures, Parametrization, Test discovery",
+                areaOfTesting: "Test Frameworks",
+                associatedLanguage: "Python",
+                sourceJD: "Bahwan CyberTek, Calfus Technologies"
+            },
+            {
+                primarySkill: "Katalon Studio",
+                associatedSkills: "Katalon Recorder, Katalon Analytics, Object Repository",
+                associatedTerms: "Test automation, Web testing, Mobile testing, API testing",
+                areaOfTesting: "Test Automation Platforms",
+                associatedLanguage: "Groovy, Java",
+                sourceJD: "tax.com"
+            },
+            {
+                primarySkill: "Git",
+                associatedSkills: "GitHub, GitLab, Bitbucket, Git Flow",
+                associatedTerms: "Version control, Branching, Pull requests, Code review",
+                areaOfTesting: "Version Control",
+                associatedLanguage: "N/A",
+                sourceJD: "Infoblox, DigiCert, Rigbot"
+            },
+            {
+                primarySkill: "Docker",
+                associatedSkills: "Docker Compose, Docker Hub, Containerization",
+                associatedTerms: "Container testing, Test environment setup, Microservices testing",
+                areaOfTesting: "DevOps/Infrastructure",
+                associatedLanguage: "Shell scripting, YAML",
+                sourceJD: "Qualys, Quest Software, Infoblox"
+            },
+            {
+                primarySkill: "Kubernetes",
+                associatedSkills: "kubectl, Helm, Minikube, K8s operators",
+                associatedTerms: "Container orchestration, Pod testing, Service mesh testing",
+                areaOfTesting: "DevOps/Infrastructure",
+                associatedLanguage: "YAML, Shell scripting",
+                sourceJD: "Qualys, Guidewire Software, Calfus Technologies"
+            },
+            {
+                primarySkill: "AWS Testing",
+                associatedSkills: "AWS SDK, CloudFormation, AWS CLI, Lambda testing",
+                associatedTerms: "Cloud testing, Serverless testing, Infrastructure testing",
+                areaOfTesting: "Cloud Testing",
+                associatedLanguage: "Python, Java, JavaScript",
+                sourceJD: "Truminds, BRIDGEi2i, Qualcomm"
+            },
+            {
+                primarySkill: "Azure DevOps",
+                associatedSkills: "Azure Pipelines, Azure Test Plans, Azure Boards",
+                associatedTerms: "CI/CD, Test management, Agile planning, Release management",
+                areaOfTesting: "CI/CD Tools",
+                associatedLanguage: "YAML, PowerShell",
+                sourceJD: "Quest Software, System Soft Technologies"
+            },
+            {
+                primarySkill: "Security Testing",
+                associatedSkills: "OWASP ZAP, Burp Suite, Nessus, SQLMap",
+                associatedTerms: "Vulnerability scanning, Penetration testing, OWASP Top 10",
+                areaOfTesting: "Security Testing",
+                associatedLanguage: "Python, Bash",
+                sourceJD: "QNOPY Inc, Pixous Technologies"
+            },
+            {
+                primarySkill: "TestRail",
+                associatedSkills: "Test case management, Test runs, Milestones",
+                associatedTerms: "Test planning, Test execution tracking, Reporting",
+                areaOfTesting: "Test Management",
+                associatedLanguage: "N/A",
+                sourceJD: "Infinera, Purpletalk, First Advantage"
+            },
+            {
+                primarySkill: "Ginkgo/Gomega",
+                associatedSkills: "BDD for Go, Test suites, Matchers",
+                associatedTerms: "Go testing, BDD, Unit testing, Integration testing",
+                areaOfTesting: "Test Frameworks",
+                associatedLanguage: "Go/Golang",
+                sourceJD: "Calfus Technologies"
+            },
+            {
+                primarySkill: "Locust",
+                associatedSkills: "Distributed load testing, Web UI, Python scripts",
+                associatedTerms: "Load testing, Performance testing, User simulation",
+                areaOfTesting: "Performance Testing",
+                associatedLanguage: "Python",
+                sourceJD: "Xoxoday, Pixous Technologies"
+            },
+            {
+                primarySkill: "Gatling",
+                associatedSkills: "Gatling Recorder, Gatling DSL, Reports",
+                associatedTerms: "Performance testing, Load injection, Scenario creation",
+                areaOfTesting: "Performance Testing",
+                associatedLanguage: "Scala, Java",
+                sourceJD: "Xoxoday"
+            },
+            {
+                primarySkill: "Jasmine",
+                associatedSkills: "Spies, Matchers, Async support",
+                associatedTerms: "JavaScript testing, BDD, Unit testing, Spec files",
+                areaOfTesting: "Test Frameworks",
+                associatedLanguage: "JavaScript",
+                sourceJD: "Bahwan CyberTek, Rigbot, Teradata"
+            },
+            {
+                primarySkill: "Jest",
+                associatedSkills: "Snapshot testing, Mocking, Coverage reports",
+                associatedTerms: "JavaScript testing, React testing, Unit testing",
+                areaOfTesting: "Test Frameworks",
+                associatedLanguage: "JavaScript, TypeScript",
+                sourceJD: "Quest Software, Teradata"
+            },
+            {
+                primarySkill: "Mocha",
+                associatedSkills: "Chai, Sinon, Istanbul",
+                associatedTerms: "JavaScript testing, Async testing, Test runners",
+                areaOfTesting: "Test Frameworks",
+                associatedLanguage: "JavaScript",
+                sourceJD: "Bahwan CyberTek, Teradata"
+            },
+            {
+                primarySkill: "Protractor",
+                associatedSkills: "WebDriver, Angular testing, Jasmine integration",
+                associatedTerms: "Angular testing, E2E testing, Async/await",
+                areaOfTesting: "UI/Web Automation",
+                associatedLanguage: "JavaScript, TypeScript",
+                sourceJD: "Quest Software, C1X Inc, SigFig"
+            },
+            {
+                primarySkill: "Manual Testing",
+                associatedSkills: "Test case design, Exploratory testing, Ad-hoc testing",
+                associatedTerms: "Black box testing, White box testing, Regression testing, Smoke testing",
+                areaOfTesting: "Manual Testing",
+                associatedLanguage: "N/A",
+                sourceJD: "Multiple JDs - Common requirement"
+            },
+            {
+                primarySkill: "Test Planning",
+                associatedSkills: "Test strategy, Test estimation, Risk analysis",
+                associatedTerms: "Test documentation, Test coverage, Traceability matrix",
+                areaOfTesting: "Test Management",
+                associatedLanguage: "N/A",
+                sourceJD: "Truminds, Qualys, Bellurbis"
+            },
+            {
+                primarySkill: "Agile Testing",
+                associatedSkills: "Scrum, Kanban, Sprint planning, User stories",
+                associatedTerms: "Iterative testing, Continuous testing, Daily standups",
+                areaOfTesting: "Methodology",
+                associatedLanguage: "N/A",
+                sourceJD: "Most JDs mention Agile/Scrum"
+            },
+            {
+                primarySkill: "BDD",
+                associatedSkills: "Cucumber, SpecFlow, Behave",
+                associatedTerms: "Behavior-driven development, Feature files, Scenarios",
+                areaOfTesting: "Methodology",
+                associatedLanguage: "Various",
+                sourceJD: "Qualys, First Advantage, Autuskey"
+            },
+            {
+                primarySkill: "TDD",
+                associatedSkills: "Unit testing frameworks, Red-Green-Refactor",
+                associatedTerms: "Test-driven development, Test first approach",
+                areaOfTesting: "Methodology",
+                associatedLanguage: "Various",
+                sourceJD: "Qualcomm, Teradata"
+            },
+            {
+                primarySkill: "ETL Testing",
+                associatedSkills: "Data validation, Informatica testing, Talend",
+                associatedTerms: "Data warehouse testing, Data migration, Data quality",
+                areaOfTesting: "Data Testing",
+                associatedLanguage: "SQL, Python",
+                sourceJD: "Advance Auto Parts"
+            },
+            {
+                primarySkill: "Accessibility Testing",
+                associatedSkills: "JAWS, NVDA, Axe, Wave",
+                associatedTerms: "WCAG compliance, Screen reader testing, Keyboard navigation",
+                areaOfTesting: "Specialized Testing",
+                associatedLanguage: "N/A",
+                sourceJD: "Implied in several JDs"
+            },
+            {
+                primarySkill: "Mobile Web Testing",
+                associatedSkills: "BrowserStack, Sauce Labs, Device farms",
+                associatedTerms: "Responsive testing, Cross-device testing, Touch gestures",
+                areaOfTesting: "Mobile Testing",
+                associatedLanguage: "Various",
+                sourceJD: "Bellurbis, MTAP Technologies"
+            },
+            {
+                primarySkill: "Salesforce Testing",
+                associatedSkills: "Apex testing, Lightning testing, SOQL",
+                associatedTerms: "CRM testing, Workflow testing, Integration testing",
+                areaOfTesting: "Domain-Specific Testing",
+                associatedLanguage: "Apex, JavaScript",
+                sourceJD: "Apex It Solutions, Infoblox"
+            },
+            {
+                primarySkill: "IoT Testing",
+                associatedSkills: "MQTT testing, CoAP, Device simulation",
+                associatedTerms: "Connectivity testing, Protocol testing, Edge testing",
+                areaOfTesting: "Specialized Testing",
+                associatedLanguage: "Python, C++",
+                sourceJD: "Plume Design"
+            },
+            {
+                primarySkill: "Microservices Testing",
+                associatedSkills: "Service virtualization, Contract testing, Pact",
+                associatedTerms: "Service mesh testing, API gateway testing",
+                areaOfTesting: "Architecture Testing",
+                associatedLanguage: "Various",
+                sourceJD: "Qualys, Advance Auto Parts"
+            },
+            {
+                primarySkill: "GraphQL Testing",
+                associatedSkills: "GraphQL Playground, Apollo testing",
+                associatedTerms: "Query testing, Mutation testing, Schema validation",
+                areaOfTesting: "API Testing",
+                associatedLanguage: "JavaScript, TypeScript",
+                sourceJD: "Implied in modern tech stacks"
+            },
+            {
+                primarySkill: "Kafka Testing",
+                associatedSkills: "Kafka Connect, Schema Registry, KSQL",
+                associatedTerms: "Message queue testing, Event streaming, Producer/Consumer testing",
+                areaOfTesting: "Integration Testing",
+                associatedLanguage: "Java, Python",
+                sourceJD: "Advance Auto Parts"
+            },
+            {
+                primarySkill: "Blockchain Testing",
+                associatedSkills: "Smart contract testing, Truffle, Ganache",
+                associatedTerms: "Transaction testing, Node testing, Consensus testing",
+                areaOfTesting: "Specialized Testing",
+                associatedLanguage: "Solidity, JavaScript",
+                sourceJD: "Calfus Technologies (role category)"
+            }
+        ];
+
+        function populateTable(data = qaSkillsData) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach(skill => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = skill.primarySkill;
+                row.insertCell(1).textContent = skill.associatedSkills;
+                row.insertCell(2).textContent = skill.associatedTerms;
+                row.insertCell(3).textContent = skill.areaOfTesting;
+                row.insertCell(4).textContent = skill.associatedLanguage;
+                row.insertCell(5).textContent = skill.sourceJD;
+            });
+        }
+
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const filteredData = qaSkillsData.filter(skill => {
+                return Object.values(skill).some(val =>
+                    String(val).toLowerCase().includes(filter)
+                );
+            });
+            populateTable(filteredData);
+        }
+
+        function downloadExcel() {
+            const ws_data = [
+                ['Primary Skill', 'Associated Skills', 'Associated Terms', 'Area of Testing', 'Associated Language', 'Source JD']
+            ];
+
+            qaSkillsData.forEach(skill => {
+                ws_data.push([
+                    skill.primarySkill,
+                    skill.associatedSkills,
+                    skill.associatedTerms,
+                    skill.areaOfTesting,
+                    skill.associatedLanguage,
+                    skill.sourceJD
+                ]);
+            });
+
+            const ws = XLSX.utils.aoa_to_sheet(ws_data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "QA Skills Analysis");
+
+            const colWidths = [
+                {wch: 25}, {wch: 45}, {wch: 55}, {wch: 25}, {wch: 30}, {wch: 35}
+            ];
+            ws['!cols'] = colWidths;
+
+            XLSX.writeFile(wb, "QA_Skills_Analysis_60_JDs.xlsx");
+        }
+
+        window.onload = function() {
+            populateTable();
+        };
+    </script>
+</body>
+</html>
